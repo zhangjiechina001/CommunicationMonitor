@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 #include "Log/logger.h"
@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _monitor=new TCPMonitor();
     _monitor->SetConfig(obj);
     _monitor->start();
+    ui->btnUpdateStatus->setChecked(true);
 }
 
 void MainWindow::Log(QString log)
@@ -50,4 +51,9 @@ void MainWindow::on_chbIsMonitor_clicked(bool checked)
 void MainWindow::on_btnUpdateStatus_clicked()
 {
     _monitor->ExecuteSingle();
+}
+
+void MainWindow::on_txtLog_destroyed()
+{
+
 }

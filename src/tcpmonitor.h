@@ -1,4 +1,4 @@
-#pragma execution_character_set("utf-8")
+﻿#pragma execution_character_set("utf-8")
 #ifndef TCPMONITOR_H
 #define TCPMONITOR_H
 
@@ -22,6 +22,7 @@ public:
     void run() override;
 
     void WaitForEnd();
+
     void ExecuteSingle();
 
     static QJsonObject CreateDefault();

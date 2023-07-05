@@ -1,4 +1,4 @@
-#ifndef MAINWINDOW_H
+﻿#ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
@@ -24,6 +24,8 @@ private slots:
     void on_btnUpdateStatus_clicked();
 
     void Log(QString log);
+
+    void on_txtLog_destroyed();
 
 private:
     Ui::MainWindow *ui;

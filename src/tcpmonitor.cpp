@@ -1,4 +1,4 @@
-#include "tcpmonitor.h"
+﻿#include "tcpmonitor.h"
 #include <QDebug>
 #include <QElapsedTimer>
 
@@ -44,7 +44,7 @@ QJsonObject TCPMonitor::CreateDefault()
         {"Interval",60},
         {"Items",QJsonObject
             {
-                {"Laser","127.0.0.1:508"}
+                {"激光器","127.0.0.1:508"}
             }
         }
     };
