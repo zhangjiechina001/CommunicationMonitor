@@ -23,12 +23,14 @@ private slots:
 
     void on_btnUpdateStatus_clicked();
 
+    void Log(QString log);
+
 private:
     Ui::MainWindow *ui;
 
     TCPMonitor *_monitor;
 
-    void Log(QString log);
+
 };
 
 #endif // MAINWINDOW_H

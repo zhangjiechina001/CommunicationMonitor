@@ -1,4 +1,3 @@
-#pragma execution_character_set("utf-8")
 #include "tcpmonitor.h"
 #include <QDebug>
 #include <QElapsedTimer>
@@ -42,7 +41,12 @@ void TCPMonitor::ExecuteSingle()
 QJsonObject TCPMonitor::CreateDefault()
 {
     QJsonObject obj{
-        {"1间隔",60},
+        {"Interval",60},
+        {"Items",QJsonObject
+            {
+                {"Laser","127.0.0.1:508"}
+            }
+        }
     };
     JsonUtils::LoadJsonObject("abc",obj);
     return obj;

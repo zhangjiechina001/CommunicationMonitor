@@ -10,9 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     qInstallMessageHandler(Logger::CustomMessageHandler);
-    connect(&Logger::Instance(),SIGNAL(OnLogging(QString)),this,SLOT(Log(QString)),Qt::AutoConnection);
+    connect(&Logger::Instance(),SIGNAL(OnLogging(QString)),this,SLOT(Log(QString)),Qt::QueuedConnection);
     QJsonObject obj=TCPMonitor::CreateDefault();
     JsonUtils::LoadJsonObject("CommunicationManager",obj,false);
+    _monitor=new TCPMonitor();
     _monitor->SetConfig(obj);
     _monitor->start();
 }
