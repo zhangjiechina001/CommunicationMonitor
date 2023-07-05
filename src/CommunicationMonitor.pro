@@ -25,10 +25,12 @@ DESTDIR += $$PWD/bin_vs
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    iputils.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    iputils.h
 
 FORMS += \
         mainwindow.ui
