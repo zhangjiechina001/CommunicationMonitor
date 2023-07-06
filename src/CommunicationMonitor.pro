@@ -37,3 +37,11 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+#RESOURCES += \
+#    source.qrc
+
+RESOURCES += \
+    source.qrc
+
+RC_ICONS=monitor_screen_icon.ico
