@@ -6,6 +6,14 @@
 #include <QThread>
 #include <QList>
 #include <QJsonObject>
+#include "tcpclient.h"
+
+struct CommandTest
+{
+    QByteArray SendCommand;
+    QByteArray ReceiveCommand;
+    TcpClient *Client;
+};
 
 class TCPMonitor : public QThread
 {
@@ -36,6 +44,8 @@ private:
     bool _isRunning=true;
     int _interval=60;
     bool _isPause=false;
+
+    QList<CommandTest> _allcmd;
 };
 
 #endif // TCPMONITOR_H

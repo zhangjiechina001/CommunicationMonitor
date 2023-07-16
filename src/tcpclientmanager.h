@@ -1,11 +1,25 @@
-#ifndef TCPCLIENTMANAGER_H
+﻿#ifndef TCPCLIENTMANAGER_H
 #define TCPCLIENTMANAGER_H
 
+#include <QObject>
 
-class TcpClientManager
+#include "tcpclient.h"
+#include "tcpmonitor.h"
+
+class TcpClientManager:public QObject
 {
+    Q_OBJECT
+private:
+    explicit TcpClientManager();
+    TcpClientManager& operator=(const TcpClientManager&) = delete;
+    QList<TcpClient*> _allClients;
+    TCPMonitor *_monitor=nullptr;
+
 public:
-    TcpClientManager();
+    static TcpClientManager& Instance();
+    ~TcpClientManager();
+
+
 };
 
 #endif // TCPCLIENTMANAGER_H

@@ -53,7 +53,3 @@ void MainWindow::on_btnUpdateStatus_clicked()
     _monitor->ExecuteSingle();
 }
 
-void MainWindow::on_txtLog_destroyed()
-{
-
-}

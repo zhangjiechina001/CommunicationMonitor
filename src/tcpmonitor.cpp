@@ -13,6 +13,20 @@ TCPMonitor::TCPMonitor(QObject *parent) : QThread(parent)
 bool TCPMonitor::SetConfig(QJsonObject obj)
 {
     _communicationList=obj["Items"].toObject();
+
+    for(auto key:_communicationList.keys())
+    {
+        QJsonObject obj=_communicationList[key].toObject();
+        TcpClient *client=new TcpClient();
+        client->SetName(key);
+        client->SetCommunicationParam(obj["CommunicationParam"].toString());
+        client->Connect();
+        CommandTest testItem;
+        testItem.Client=client;
+        testItem.SendCommand=QByteArray::fromHex(obj["SendCommand"].toString().trimmed().toLatin1());
+//        testItem.ReceiveCommand=QByteArray::fromHex(obj["ReceiveCommand"].toString().trimmed().toLatin1());
+        qDebug()<<key<<":"<<client->IsConnected()<<testItem.SendCommand<<" "<<testItem.ReceiveCommand;
+    }
     _interval=obj["Interval"].toInt();
     return true;
 }
@@ -29,13 +43,17 @@ void TCPMonitor::Resume()
 
 void TCPMonitor::ExecuteSingle()
 {
-    for(auto key:_communicationList.keys())
+    qDebug()<<"---------- START ----------";
+    for(const CommandTest &cmd:_allcmd)
     {
-        if(!IPUtils::IsPortListening(_communicationList[key].toString()))
+        QByteArray rec;
+
+        if(!cmd.Client->SendReply(cmd.SendCommand,rec))
         {
-            qDebug()<<key<<" "<<_communicationList[key].toString()<<"is close";
+            qDebug()<<cmd.Client->GetClientName()<<"测试失败！";
         }
     }
+    qDebug()<<"---------- END ----------";
 }
 
 QJsonObject TCPMonitor::CreateDefault()
