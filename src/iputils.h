@@ -1,4 +1,4 @@
-﻿#pragma execution_character_set("utf-8")
+#pragma execution_character_set("utf-8")
 #ifndef IPUTILS_H
 #define IPUTILS_H
 
@@ -40,11 +40,6 @@ public:
 
     static bool IsPortListening(const QString ipPort)
     {
-        if(!IsIPAddress(ipPort))
-        {
-            return false;
-        }
-
         QString ip=ipPort.split(":").at(0);
         QString port=ipPort.split(":").at(1);
         return IsPortListening(ip,port.toInt());
@@ -84,8 +79,7 @@ public:
     static bool IsIPAddress(const QString& ipAddress)
     {
         QHostAddress address(ipAddress);
-        return address.protocol() == QAbstractSocket::IPv4Protocol
-               || address.protocol() == QAbstractSocket::IPv6Protocol;
+        return address.protocol() == QAbstractSocket::IPv4Protocol;
     }
 };
 

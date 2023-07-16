@@ -1,0 +1,401 @@
+﻿QWidget#MainWindow{
+    background-color:rgba(255,255,255,255);
+    /*border-image:url(:/Config/clientbackground.jpg);*/
+}
+
+QFrame#IDC_frame_logo{
+    border-image:url(:/Config/background-top.png);
+}
+QFrame#frame_area_para{
+    border-image:url(:/Config/background-bottom.png);
+}
+
+QWidget#stackedWidget{
+    margin:0px,0px,0px,0px;
+}
+
+QWidget#IDC_stackedWidget_Result{
+    margin:0px,0px,0px,0px;
+    border-image:url(:/Config/recentresultbackground.png);
+}
+
+QTableView{
+    background-color:rgb(255,255,255);
+    alternate-background-color:rgb(249,249,249);
+}
+
+/*QHeaderView::section
+{
+    font:15px;
+    font-weight:bold;
+
+}*/
+
+
+QTableView#IDC_tableView_currentResult {
+
+    /*alternate-background-color:rgb(67,150,202);*/
+    gridline-color:rgb(67,150,202);
+    font:25px;
+    /*font-weight:bold;*/
+    color:black;
+    font-family:"Microsoft YaHei";
+}
+
+QListWidget#listWidget {
+    show-decoration-selected: 1; /* make the selection span the entire width of the view */
+    border:0px solid white;
+    color:#001558;
+    margin:0px,0px,0px,0px;
+    padding-top:40px;
+    border-image:url(:/Config/listwidget.png);
+}
+
+QListWidget#listWidget ::item
+{
+    padding-top:10px;
+    padding-bottom:5px;
+    padding-left:5px;
+    padding-right:10px;
+}
+
+QListWidget#listWidget ::item:selected {
+    background:rgb(255, 255, 255); /*改变背景色*/
+    show-decoration-selected: 1
+}
+
+QTextEdit{
+    background:rgb(255, 255, 255); /*改变背景色*/
+}
+
+QTextEdit#IDC_textEdit_CurResult {
+    border:0,0,0,0;
+}
+
+QPushButton#IDC_Btn_StartMeasure
+{
+    background-color:rgba(255, 255, 255,0);
+    border-style:outset;  
+    border-width:0px;  
+    border-color:rgb(10,45,110); 
+    border-radius:0px;  
+    padding:4px;
+    qproperty-iconSize: 30px 40px;
+}
+
+/*鼠标不可用时的效果*/
+QPushButton#IDC_Btn_StartMeasure:disabled
+{
+    color: rgb(67, 150, 202);
+    background-color:white;
+    border-style:inset;
+    padding-left:0px;
+    padding-top:0px;
+    qproperty-iconSize: 30px 40px;
+}
+
+/*鼠标不可用时的效果*/
+QPushButton#IDC_Btn_Stop:pressed
+{
+    background-color:white;
+    border-style:inset;
+    padding-left:0px;
+    padding-top:0px;
+}
+
+QPushButton#IDC_Btn_Stop
+{
+    background-color:rgba(255, 255, 255,0);
+    border-style:outset;
+    border-width:0px;
+    border-color:rgb(10,45,110);
+    border-radius:0px;
+    padding:4px;
+    qproperty-iconSize: 30px 40px;
+ }
+/*鼠标不可用时的效果*/
+QPushButton#IDC_Btn_Stop:disabled
+{
+    color: rgb(67, 150, 202);
+    background-color:white;
+    border-style:inset;
+    padding-left:0px;
+    padding-top:0px;
+    qproperty-iconSize: 30px 40px;
+}
+
+QPushButton#IDC_Btn_SaveInput
+{
+    background-color:rgb(67, 150, 202);
+    color:rgb(0, 21, 88);
+    border-style:outset;
+    border-width:0px;
+    border-color:rgb(10,45,110);
+    border-radius:10px;
+    padding:4px;
+}
+
+QCheckBox#IDC_Chk_AutoRemark {
+    spacing:5px;
+}
+
+QCheckBox#IDC_Chk_AutoRemark::indicator {
+      width: 25px;
+      height: 25px;
+}
+
+/*鼠标按压时的效果*/
+QPushButton#IDC_Btn_SaveInput:disabled
+{
+    color:gray;
+    background-color:rgb(183, 192, 200); /*改变背景色*/
+    border-style:inset;/*改变边框风格*/
+    padding-left:0px;
+    padding-top:0px;
+}
+/*鼠标按压时的效果*/
+QPushButton#IDC_Btn_SaveInput:pressed
+{
+    color:white;
+    background-color:rgb(0, 21, 88); /*改变背景色*/
+    border-style:inset;/*改变边框风格*/
+    padding-left:0px;
+    padding-top:0px;
+}
+
+QPushButton#IDC_Btn_SelectedStatics
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_SelectedStatics:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_SelectedStatics:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_AllStatics
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_AllStatics:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_AllStatics:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_CancleSelected
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_CancleSelected:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_CancleSelected:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_ExportStaticsData
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_ExportStaticsData:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_ExportStaticsData:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_ClearStaticsRes
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_ClearStaticsRes:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_ClearStaticsRes:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_Query
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_Query:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+QPushButton#IDC_Btn_Query:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#IDC_Btn_Delete
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_Delete:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+QPushButton#IDC_Btn_Delete:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+QPushButton#IDC_Btn_Export
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#IDC_Btn_Export:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#IDC_Btn_Export:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#btn_historyTrend
+{
+    border-image:url(:/Config/normal.png);
+}
+
+QPushButton#btn_historyTrend:hover
+{
+    border-image:url(:/Config/hover.png);
+}
+
+QPushButton#btn_historyTrend:pressed
+{
+    border-image:url(:/Config/pressed.png);
+}
+
+QPushButton#btn_recentCurve
+{
+    background-color:rgb(67, 150, 202);
+    color:rgb(0, 21, 88);
+    border-style:outset;
+    border-width:0px;
+    border-color:rgb(10,45,110);
+    border-radius:6px;
+    padding:2px;
+}
+
+/*进度条*/
+QProgressBar#IDC_progressBar_CurProgress{
+        border: none;
+        text-align: center;
+        color: white;
+        font-size:20px;
+        font-weight:bold;
+        border-image:url(:/Config/progressbar-bottom);
+}
+
+QProgressBar#IDC_progressBar_CurProgress::chunk {
+        border-image:url(:/Config/progressbar-top);
+}
+
+QLineEdit#IDC_Lne_StatusInfo {
+    border:0 0 0 0;
+    background:rgb(255,255,255);
+}
+
+QGroupBox#IDC_groupBox_measureResult::title {
+     color:white;
+     subcontrol-origin: margin;
+     subcontrol-position: top left;
+     /*top:10px;*/
+     padding-top: 2px;
+     padding-bottom: 6px;
+     padding-left: 15px;
+     padding-right: 40px;
+     border-image: url(:/Config/groupboxbackground.png);
+}
+
+QGroupBox#IDC_groupBox_recentResult::title {
+     color:white;
+     subcontrol-origin: margin;
+     subcontrol-position: top left;
+     padding-top: 2px;
+     padding-bottom: 6px;
+     padding-left: 15px;
+     padding-right: 50px;
+     border-image: url(:/Config/groupboxbackground.png);
+ }
+
+QLabel#lbl_recentResult {
+     color:white;
+     padding-top: 2px;
+     padding-bottom: 6px;
+     padding-left: 15px;
+     padding-right: 50px;
+     border-image: url(:/Config/groupboxbackground.png);
+ }
+
+QGroupBox#groupBox_queryResult_statistics::title {
+     color:white;
+     subcontrol-origin: margin;
+     subcontrol-position: top left;
+     /*top:10px;*/
+     padding-top: 2px;
+     padding-bottom: 6px;
+     padding-left: 15px;
+     padding-right: 40px;
+     border-image: url(:/Config/groupboxbackground.png);
+}
+
+QGroupBox#groupBox_average_statistics::title {
+     color:white;
+     subcontrol-origin: margin;
+     subcontrol-position: top left;
+     padding-top: 2px;
+     padding-bottom: 6px;
+     padding-left: 15px;
+     padding-right: 50px;
+     border-image: url(:/Config/groupboxbackground.png);
+ }
+
+
+QComboBox#cmb_statusType
+{
+    background: white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
