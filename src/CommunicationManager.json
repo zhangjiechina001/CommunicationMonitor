@@ -5,6 +5,11 @@
                 "CommunicationParam":"127.0.0.1:508",
                 "SendCommand": "12345678",
                 "ReceiveCommand": "23456789"
+        },
+        "光谱仪":{
+                "CommunicationParam":"127.0.0.1:508",
+                "SendCommand": "12345678",
+                "ReceiveCommand": "23456789"
         }
     }
 }
