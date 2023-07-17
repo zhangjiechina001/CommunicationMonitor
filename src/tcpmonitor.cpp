@@ -25,7 +25,7 @@ bool TCPMonitor::SetConfig(QJsonObject obj)
         testItem.Client=client;
         testItem.SendCommand=QByteArray::fromHex(obj["SendCommand"].toString().trimmed().toLatin1());
         _allcmd.append(testItem);
-        qDebug()<<key<<":"<<client->IsConnected()<<testItem.SendCommand<<" "<<testItem.ReceiveCommand;
+//        qDebug()<<key<<":"<<client->IsConnected()<<" "<<testItem.SendCommand;
     }
     _interval=obj["Interval"].toInt();
     return true;
