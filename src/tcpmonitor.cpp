@@ -24,7 +24,7 @@ bool TCPMonitor::SetConfig(QJsonObject obj)
         CommandTest testItem;
         testItem.Client=client;
         testItem.SendCommand=QByteArray::fromHex(obj["SendCommand"].toString().trimmed().toLatin1());
-//        testItem.ReceiveCommand=QByteArray::fromHex(obj["ReceiveCommand"].toString().trimmed().toLatin1());
+        _allcmd.append(testItem);
         qDebug()<<key<<":"<<client->IsConnected()<<testItem.SendCommand<<" "<<testItem.ReceiveCommand;
     }
     _interval=obj["Interval"].toInt();
@@ -50,24 +50,10 @@ void TCPMonitor::ExecuteSingle()
 
         if(!cmd.Client->SendReply(cmd.SendCommand,rec))
         {
-            qDebug()<<cmd.Client->GetClientName()<<"测试失败！";
-        }
+            qCritical()<<cmd.Client->GetClientName()<<"测试失败！";
+        }        
     }
     qDebug()<<"---------- END ----------";
-}
-
-QJsonObject TCPMonitor::CreateDefault()
-{
-    QJsonObject obj{
-        {"Interval",60},
-        {"Items",QJsonObject
-            {
-                {"激光器","127.0.0.1:508"}
-            }
-        }
-    };
-    JsonUtils::LoadJsonObject("abc",obj);
-    return obj;
 }
 
 void TCPMonitor::run()

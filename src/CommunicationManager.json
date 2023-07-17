@@ -1,9 +1,9 @@
 ﻿{
-    "Interval": 2,
+    "Interval": 10,
     "Items": {
         "激光器":{
-                "CommunicationParam":"127.0.0.1:508",
-                "SendCommand": "12345678",
+                "CommunicationParam":"127.0.0.1:550",
+                "SendCommand": "5d 01 04 e0 41",
                 "ReceiveCommand": "23456789"
         }
     }

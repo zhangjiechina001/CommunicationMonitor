@@ -11,7 +11,7 @@ TcpClient::TcpClient(QObject *parent) : QObject(parent)
     _timer=new QTimer(this);
     _timer->setInterval(3*1000);
     connect(_timer,&QTimer::timeout,this,&TcpClient::reconnect);
-    _timer->start();
+//    _timer->start();
     connect(_socket,&QTcpSocket::readyRead,this,&TcpClient::OnDataReady);
 }
 
@@ -26,7 +26,7 @@ void TcpClient::reconnect()
     {
         _socket->abort(); // 中止当前连接
         bool ret=ConnectToHost(); // 重新连接到服务器
-//        qDebug() << "Reconnecting to server..."<<ret;
+        qDebug() << "Reconnecting to server..."<<ret;
     }
 }
 
@@ -34,9 +34,9 @@ void TcpClient::OnDataReady()
 {
 }
 
-
 void TcpClient::SetCommunicationParam(QString communicationParam)
 {
+    qDebug()<<"ipPort"<<communicationParam;
     _ipPort=communicationParam;
 }
 
@@ -75,40 +75,62 @@ void TcpClient::Dispose()
 bool TcpClient::ConnectToHost()
 {
     QString hostaddr = _ipPort.split(":").at(0);
-    QString strportID = _ipPort.split(":").at(1);
-    _socket->connectToHost(hostaddr,strportID.toUShort());
-    return _socket->waitForConnected(100);
+    int strportID = _ipPort.split(":").at(1).toInt();
+    _socket->connectToHost(hostaddr,strportID);
+    _socket->setSocketOption(QAbstractSocket::KeepAliveOption,1);
+    return _socket->waitForConnected(3000);
 }
 
 bool TcpClient::DisConnect()
 {
-    return _socket->disconnect();
+    _socket->abort();
+    return true;
 }
 
 bool TcpClient::SendReply(QByteArray sendBuff, QByteArray &receiveBuff)
 {
+    for(int i=0;i<3;i++)
+    {
+        bool sendResult=SendReplyImpl(sendBuff,receiveBuff);
+
+        if(sendResult)
+        {
+            return true;
+        }
+        else
+        {
+            qDebug()<<__FUNCTION__<<__LINE__;
+            DisConnect();
+            qDebug()<<__FUNCTION__<<__LINE__;
+            bool isConnedted=ConnectToHost();
+            qDebug()<<__FUNCTION__<<__LINE__<<"Reconnected:"<<isConnedted;
+        }
+    }
+    qDebug()<<__FUNCTION__<<__LINE__<<"数据连续三次发送失败:"<<_socket->errorString();
+    return false;
+}
+
+bool TcpClient::SendReplyImpl(QByteArray sendBuff, QByteArray &receiveBuff)
+{
     _socket->readAll();
     int ret=_socket->write(sendBuff);
-    _socket->waitForBytesWritten(100);
-    OnSend(HexToString(sendBuff));
+    _socket->waitForBytesWritten(3000);
     if(ret!=sendBuff.size())
     {
         qDebug()<<__FUNCTION__<<__LINE__<<"write data error"<<_socket->errorString();
         return false;
     }
 
-    QThread::msleep(50);
-    if(_socket->waitForReadyRead(3*1000))
+    if(!_socket->waitForReadyRead(3*1000))
     {
-        receiveBuff=_socket->readAll();
-        emit OnReceive(HexToString(receiveBuff));
-        return true;
-    }
-    else
-    {
-        qDebug() << __FUNCTION__ << __LINE__ << "waitForReadyRead timeout";
+        qDebug() << __FUNCTION__ << __LINE__ << "waitForReadyRead timeout"<<_socket->errorString();
         return false;
     }
+
+    receiveBuff=_socket->readAll();
+    emit OnReceive(HexToString(receiveBuff));
+    return true;
+
 }
 
 bool TcpClient::SendNoReply(QByteArray sendBuff)

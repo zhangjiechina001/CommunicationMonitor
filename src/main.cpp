@@ -1,11 +1,10 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QApplication::setWindowIcon(QIcon(":/Config/monitor_screen_icon.png"));
-    QApplication::setQuitOnLastWindowClosed(false);
+    QApplication::setWindowIcon(QIcon("monitor_screen_icon.ico"));
     MainWindow w;
     w.show();
 

@@ -1,4 +1,5 @@
-﻿#ifndef TCPCLIENT_H
+﻿#pragma execution_character_set("utf-8")
+#ifndef TCPCLIENT_H
 #define TCPCLIENT_H
 
 #include <QObject>
@@ -7,12 +8,16 @@
 #include <QSemaphore>
 
 
+//QSemaphore Semaphore(1);
+
 class TcpClient :public QObject
 {
     Q_OBJECT
 public:
     explicit TcpClient(QObject *parent = nullptr);
     ~TcpClient();
+
+    void SetCommunicationParam(QString ipPort,QString name);
 
     //ICommunicationInit
     void SetCommunicationParam(QString communicationParam);
@@ -27,6 +32,7 @@ public:
     bool DisConnect();
 
     bool SendReply(QByteArray sendBuff,QByteArray &receiveBuff);
+
     bool SendNoReply(QByteArray sendBuff);
 
     QString GetClientName();
@@ -47,6 +53,8 @@ private:
     QString _ipPort="";
     QTimer* _timer=nullptr;
     bool _autoConnect=false;
+
+    bool SendReplyImpl(QByteArray sendBuff,QByteArray &receiveBuff);
 
 };
 

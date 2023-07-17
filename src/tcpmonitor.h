@@ -32,8 +32,6 @@ public:
     void WaitForEnd();
 
     void ExecuteSingle();
-
-    static QJsonObject CreateDefault();
     
 signals:
 

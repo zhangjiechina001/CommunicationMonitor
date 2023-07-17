@@ -25,6 +25,11 @@ private slots:
 
     void Log(QString log);
 
+    void on_chbIsMonitor_clicked();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     Ui::MainWindow *ui;
 

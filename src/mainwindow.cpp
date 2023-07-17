@@ -11,12 +11,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     qInstallMessageHandler(Logger::CustomMessageHandler);
     connect(&Logger::Instance(),SIGNAL(OnLogging(QString)),this,SLOT(Log(QString)),Qt::QueuedConnection);
-    QJsonObject obj=TCPMonitor::CreateDefault();
+    QJsonObject obj;
     JsonUtils::LoadJsonObject("CommunicationManager",obj,false);
     _monitor=new TCPMonitor();
     _monitor->SetConfig(obj);
     _monitor->start();
-    ui->btnUpdateStatus->setChecked(true);
+    ui->chbIsMonitor->setChecked(true);
+
 }
 
 void MainWindow::Log(QString log)
@@ -31,8 +32,6 @@ void MainWindow::Log(QString log)
 
 MainWindow::~MainWindow()
 {
-    _monitor->WaitForEnd();
-    _monitor->deleteLater();
     delete ui;
 }
 
@@ -53,3 +52,24 @@ void MainWindow::on_btnUpdateStatus_clicked()
     _monitor->ExecuteSingle();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+     qDebug()<<__LINE__;
+    _monitor->WaitForEnd();
+    qDebug()<<__LINE__;
+    _monitor->deleteLater();
+    qDebug()<<__LINE__;
+}
+
+
+void MainWindow::on_chbIsMonitor_clicked()
+{
+    if(ui->chbIsMonitor->isChecked())
+    {
+        _monitor->Resume();
+    }
+    else
+    {
+        _monitor->Pause();
+    }
+}
