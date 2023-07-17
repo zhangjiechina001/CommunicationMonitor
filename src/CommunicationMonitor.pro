@@ -28,27 +28,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     iputils.cpp \
-    tcpmonitor.cpp \
-    tcpclient.cpp \
-    tcpclientmanager.cpp
+    tcpmonitor.cpp
 
 HEADERS += \
         mainwindow.h \
     iputils.h \
-    tcpmonitor.h \
-    tcpclient.h \
-    tcpclientmanager.h
+    tcpmonitor.h
 
 FORMS += \
         mainwindow.ui
-
-DISTFILES += \
-    CommunicationManager.json
-
-srcFile1 = $$PWD/CommunicationManager.json
-srcFile2 = $$PWD/CommunicationManager.json
-dstDir = $$PWD/bin_vs/Config/CommunicationManager.json
-##windows上需要转换路径斜杠 其他系统不需要
-srcFile1 = $$replace(srcFile1, /, \\);
-#srcFile2 = $$replace(srcFile2, /, \\);
-dstDir = $$replace(dstDir, /, \\);

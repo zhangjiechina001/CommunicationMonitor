@@ -1,5 +1,4 @@
-//#pragma execution_character_set("utf-8")
-#include "tcpmonitor.h"
+﻿#include "tcpmonitor.h"
 #include <QDebug>
 #include <QElapsedTimer>
 
@@ -30,16 +29,11 @@ void TCPMonitor::Resume()
 
 void TCPMonitor::ExecuteSingle()
 {
-
     for(auto key:_communicationList.keys())
     {
         if(!IPUtils::IsPortListening(_communicationList[key].toString()))
         {
             qDebug()<<key<<" "<<_communicationList[key].toString()<<"is close";
-        }
-        else
-        {
-            qDebug()<<key<<" "<<_communicationList[key].toString()<<"is listening";
         }
     }
 }
@@ -54,7 +48,7 @@ QJsonObject TCPMonitor::CreateDefault()
             }
         }
     };
-//    JsonUtils::LoadJsonObject("abc",obj);
+    JsonUtils::LoadJsonObject("abc",obj);
     return obj;
 }
 
