@@ -1,8 +1,9 @@
-#pragma execution_character_set("utf-8")
+//#pragma execution_character_set("utf-8")
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QApplication>
 #include <QDebug>
+#include <QList>
 
 #include "Log/logger.h"
 
