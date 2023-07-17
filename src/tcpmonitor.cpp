@@ -13,6 +13,20 @@ TCPMonitor::TCPMonitor(QObject *parent) : QThread(parent)
 bool TCPMonitor::SetConfig(QJsonObject obj)
 {
     _communicationList=obj["Items"].toObject();
+
+    for(auto key:_communicationList.keys())
+    {
+        QJsonObject obj=_communicationList[key].toObject();
+        TcpClient *client=new TcpClient();
+        client->SetName(key);
+        client->SetCommunicationParam(obj["CommunicationParam"].toString());
+        client->Connect();
+        CommandTest testItem;
+        testItem.Client=client;
+        testItem.SendCommand=QByteArray::fromHex(obj["SendCommand"].toString().trimmed().toLatin1());
+        _allcmd.append(testItem);
+        qDebug()<<key<<":"<<client->IsConnected()<<testItem.SendCommand<<" "<<testItem.ReceiveCommand;
+    }
     _interval=obj["Interval"].toInt();
     return true;
 }
@@ -29,27 +43,17 @@ void TCPMonitor::Resume()
 
 void TCPMonitor::ExecuteSingle()
 {
-    for(auto key:_communicationList.keys())
+    qDebug()<<"---------- START ----------";
+    for(const CommandTest &cmd:_allcmd)
     {
-        if(!IPUtils::IsPortListening(_communicationList[key].toString()))
-        {
-            qDebug()<<key<<" "<<_communicationList[key].toString()<<"is close";
-        }
-    }
-}
+        QByteArray rec;
 
-QJsonObject TCPMonitor::CreateDefault()
-{
-    QJsonObject obj{
-        {"Interval",60},
-        {"Items",QJsonObject
-            {
-                {"激光器","127.0.0.1:508"}
-            }
-        }
-    };
-    JsonUtils::LoadJsonObject("abc",obj);
-    return obj;
+        if(!cmd.Client->SendReply(cmd.SendCommand,rec))
+        {
+            qCritical()<<cmd.Client->GetClientName()<<"测试失败！";
+        }        
+    }
+    qDebug()<<"---------- END ----------";
 }
 
 void TCPMonitor::run()

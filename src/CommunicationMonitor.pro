@@ -28,12 +28,32 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     iputils.cpp \
-    tcpmonitor.cpp
+    tcpmonitor.cpp \
+    tcpclient.cpp \
+    tcpclientmanager.cpp
 
 HEADERS += \
         mainwindow.h \
     iputils.h \
-    tcpmonitor.h
+    tcpmonitor.h \
+    tcpclient.h \
+    tcpclientmanager.h
 
 FORMS += \
         mainwindow.ui
+
+DISTFILES += \
+    CommunicationManager.json
+
+srcFile1 = $$PWD/CommunicationManager.json
+srcFile2 = $$PWD/CommunicationManager.json
+dstDir = $$PWD/bin_vs/CommunicationManager.json
+##windows上需要转换路径斜杠 其他系统不需要
+srcFile1 = $$replace(srcFile1, /, \\);
+srcFile2 = $$replace(srcFile2, /, \\);
+dstDir = $$replace(dstDir, /, \\);
+
+#编译后执行拷贝 多个拷贝可以通过 && 符号隔开
+#QMAKE_POST_LINK += copy /Y $$srcFile1 $$dstDir && copy /Y $$srcFile2 $$dstDir
+
+RC_ICONS=monitor_screen_icon.ico
